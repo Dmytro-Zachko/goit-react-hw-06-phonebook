@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { nanoid } from "nanoid";
-import { FormWrapper, Button, Input } from "./Form.styled";
-import { AddContact } from "redux/ContactsSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
+import { Button, Input, FormWrapper } from './Form.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact } from 'redux/ContactsSlice';
 
-export const FormHoocks = () => {
- const dispatch = useDispatch()
+export const FormHooks= () => {
+  const dispatch = useDispatch();
 
   const contacts = useSelector(state => state.contacts.value);
   const [name, setName] = useState('');
@@ -35,41 +35,42 @@ export const FormHoocks = () => {
       return name === newName;
     });
 
-   if (alreadyExists >= 0) {
+    if (alreadyExists >= 0) {
       Notify.failure(`${contact.name} is already added to contact list`);
       return;
     } else {
-      dispatch(AddContact(contacts));
-     }
+      dispatch(addContact(contact));
+    }
 
     setName('');
     setNumber('');
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <FormWrapper>
-        <Input
-          type="text"
-          name="name"
-          value={name}
-          placeholder="Enter name"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          onChange={handleInputChange}
-          required
-        />
-
-        <Input
-          type="tel"
-          name="number"
-          value={number}
-          placeholder="Enter phone number"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          onChange={handleInputChange}
-          required
-        />
-      </FormWrapper>
-      <Button type="submit">Add contact</Button>
-    </form>
-  );
+   <form onSubmit={handleFormSubmit}>
+<FormWrapper>
+            <label htmlFor="name">Name
+          <Input
+  type="text"
+      name="name"
+      value={name}
+      onChange={handleInputChange}
+  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                            required />
+                    </label>
+                     <label htmlFor="number">Number
+                <Input
+                  type="tel"
+                  name="number"
+                  value={number}
+                  onChange={handleInputChange}
+  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+  required
+/></label>
+        <Button type="submit">Add Contact</Button>
+          </FormWrapper>
+          </form>
+      )
 }

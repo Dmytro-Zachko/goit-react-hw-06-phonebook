@@ -1,21 +1,21 @@
-import React from "react";
-import { ContactItem } from "components/ContactItem/ContactItem";
-import { Contactlist } from "./ContactList.styled";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+import { ContactItem } from '../ContactItem/ContactItem';
+import { Contactlist } from './ContactList.styled';
 
 export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.value);
   const filter = useSelector(state => state.filter);
 
-   const getFilteredContacts = () => {
-    const normalizedFilter = filter.toString().toLowerCase().trim();
+  const getFilteredContacts = () => {
+    const normalizedFilter = filter.toLowerCase().trim();
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
 
-   const filteredContacts = getFilteredContacts();
+  const filteredContacts = getFilteredContacts();
+
   return (
     <Contactlist>
       {filteredContacts.map(contact => {

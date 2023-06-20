@@ -1,29 +1,30 @@
 import React from "react";
 import { Input, Button, Finder } from "./Filter.styled";
 import { useSelector, useDispatch } from "react-redux";
-import { FilterContact } from "redux/FilterSlice";
+import { changeFilter } from "redux/FilterSlice";
 
 export const Filter = () => {
-    const filter = useSelector(state => state.filter.filter);
-     const dispatch = useDispatch()
-    
-    const ClearFilter = () => {
-    dispatch(FilterContact(''))
-    }
+     const filter = useSelector(state => state.filter);
 
-     const OnFilterChange = event => {
-    
-    const {value} = event.currentTarget
-   dispatch(FilterContact(value))
-    }
+  const dispatch = useDispatch();
+
+  const handleFilterChange = event => {
+    const { value } = event.currentTarget;
+    dispatch(changeFilter(value));
+  };
+
+  const clearFilter = () => {
+    dispatch(changeFilter(''));
+  };
+
     
     return (<form action="">
         <Finder>Find contacts by name</Finder>
         <Input type="text"
         value={filter}
-        onChange={OnFilterChange}
+        onChange={handleFilterChange}
         />
-        <Button onClick={ClearFilter} >Clear</Button>
+        <Button onClick={clearFilter} >Clear</Button>
    </form> )
     
 }
