@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from "react";
+import React from "react";
 import { ContactList } from "components/ContactList/ContactList";
 import { Filter } from "components/Filter/Filter";
 import { Section } from "components/Section/Section";

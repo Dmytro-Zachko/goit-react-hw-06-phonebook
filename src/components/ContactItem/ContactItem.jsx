@@ -12,8 +12,8 @@ const { id, name, number } = contact;
   return (
     <>
       <li>
-        <span>{name}</span>
-        <span>{number}</span>
+        <Item>{name}</Item>
+        <Item>{number}</Item>
 
         <Button type="button" onClick={() => dispatch(DeleteContact(id))}>
           delete
@@ -28,6 +28,5 @@ ContactItem.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-  }),
-  onDelete: PropTypes.func,
+  })
 };

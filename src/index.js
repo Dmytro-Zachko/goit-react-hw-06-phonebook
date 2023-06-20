@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppH } from 'components/AppH';
 import './index.css';
-import { Provider,useSelector,useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import { store, persistor } from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { Input, Button, Finder } from "./Filter.styled";
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from "react-redux";
 import { FilterContact } from "redux/FilterSlice";
 
